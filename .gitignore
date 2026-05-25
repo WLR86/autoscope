@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.log
+config/telescope_config.local.json
+data/solver/*
+!data/solver/.gitkeep
+data/catalogs/*
+!data/catalogs/.gitkeep

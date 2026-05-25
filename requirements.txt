@@ -1,0 +1,5 @@
+pyindi-client>=2.0.0
+PyQt5>=5.15
+astropy>=5.0
+numpy>=1.21
+requests>=2.25

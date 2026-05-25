@@ -140,7 +140,7 @@ class AlignmentPanel(QWidget):
         lon = cfg.get("longitude", 2.35)
         stars = self.align.get_visible_stars(lat, lon, 0)
         for s in stars:
-            item = QListWidgetItem(f"{s.name}  ({s.constellation})  mag={s.magnitude:.1f}")
+            item = QListWidgetItem(f"{s.label()}  ({s.constellation})  mag={s.magnitude:.1f}")
             item.setData(Qt.ItemDataRole.UserRole, s)
             self.star_list.addItem(item)
 

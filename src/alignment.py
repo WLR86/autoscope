@@ -9,43 +9,50 @@ logger = logging.getLogger(__name__)
 
 class AlignmentStar:
     def __init__(self, name: str, ra_hours: float, dec_deg: float,
-                 magnitude: float, constellation: str = ""):
+                 magnitude: float, constellation: str = "",
+                 bayer: str = ""):
         self.name = name
         self.ra_hours = ra_hours
         self.dec_deg = dec_deg
         self.magnitude = magnitude
         self.constellation = constellation
+        self.bayer = bayer
+
+    def label(self) -> str:
+        if self.bayer:
+            return f"{self.bayer} · {self.name}"
+        return self.name
 
     def __repr__(self):
-        return f"{self.name} ({self.ra_hours:.2f}h, {self.dec_deg:.1f}°)"
+        return f"{self.label()} ({self.ra_hours:.2f}h, {self.dec_deg:.1f}°)"
 
 
 ALIGNMENT_STARS = [
-    AlignmentStar("Polaris", 2.530, 89.264, 1.97, "Ursa Minor"),
-    AlignmentStar("Sirius", 6.752, -16.716, -1.46, "Canis Major"),
-    AlignmentStar("Canopus", 6.398, -52.695, -0.74, "Carina"),
-    AlignmentStar("Arcturus", 14.262, 19.187, -0.05, "Boötes"),
-    AlignmentStar("Vega", 18.617, 38.784, 0.03, "Lyra"),
-    AlignmentStar("Capella", 5.278, 45.998, 0.08, "Auriga"),
-    AlignmentStar("Rigel", 5.242, -8.202, 0.18, "Orion"),
-    AlignmentStar("Procyon", 7.655, 5.224, 0.40, "Canis Minor"),
-    AlignmentStar("Betelgeuse", 5.919, 7.407, 0.42, "Orion"),
-    AlignmentStar("Altair", 19.847, 8.868, 0.76, "Aquila"),
-    AlignmentStar("Aldebaran", 4.600, 16.509, 0.87, "Taurus"),
-    AlignmentStar("Antares", 16.490, -26.432, 0.96, "Scorpius"),
-    AlignmentStar("Spica", 13.413, -11.161, 0.98, "Virgo"),
-    AlignmentStar("Pollux", 7.763, 28.026, 1.14, "Gemini"),
-    AlignmentStar("Fomalhaut", 22.958, -29.622, 1.16, "Piscis Austrinus"),
-    AlignmentStar("Deneb", 20.692, 45.280, 1.25, "Cygnus"),
-    AlignmentStar("Regulus", 10.139, 11.967, 1.36, "Leo"),
-    AlignmentStar("Castor", 7.592, 31.888, 1.58, "Gemini"),
-    AlignmentStar("Bellatrix", 5.417, 6.350, 1.64, "Orion"),
-    AlignmentStar("Elnath", 5.434, 28.610, 1.65, "Taurus"),
-    AlignmentStar("Mirach", 1.155, 35.620, 2.07, "Andromeda"),
-    AlignmentStar("Hamal", 2.116, 23.462, 2.01, "Aries"),
-    AlignmentStar("Mirfak", 3.361, 49.861, 1.79, "Perseus"),
-    AlignmentStar("Alkaid", 13.792, 49.300, 1.86, "Ursa Major"),
-    AlignmentStar("Dubhe", 11.050, 61.750, 1.79, "Ursa Major"),
+    AlignmentStar("Polaris", 2.530, 89.264, 1.97, "Ursa Minor", "α Ursae Minoris"),
+    AlignmentStar("Sirius", 6.752, -16.716, -1.46, "Canis Major", "α Canis Majoris"),
+    AlignmentStar("Canopus", 6.398, -52.695, -0.74, "Carina", "α Carinae"),
+    AlignmentStar("Arcturus", 14.262, 19.187, -0.05, "Boötes", "α Boötis"),
+    AlignmentStar("Vega", 18.617, 38.784, 0.03, "Lyra", "α Lyrae"),
+    AlignmentStar("Capella", 5.278, 45.998, 0.08, "Auriga", "α Aurigae"),
+    AlignmentStar("Rigel", 5.242, -8.202, 0.18, "Orion", "β Orionis"),
+    AlignmentStar("Procyon", 7.655, 5.224, 0.40, "Canis Minor", "α Canis Minoris"),
+    AlignmentStar("Betelgeuse", 5.919, 7.407, 0.42, "Orion", "α Orionis"),
+    AlignmentStar("Altair", 19.847, 8.868, 0.76, "Aquila", "α Aquilae"),
+    AlignmentStar("Aldebaran", 4.600, 16.509, 0.87, "Taurus", "α Tauri"),
+    AlignmentStar("Antares", 16.490, -26.432, 0.96, "Scorpius", "α Scorpii"),
+    AlignmentStar("Spica", 13.413, -11.161, 0.98, "Virgo", "α Virginis"),
+    AlignmentStar("Pollux", 7.763, 28.026, 1.14, "Gemini", "β Geminorum"),
+    AlignmentStar("Fomalhaut", 22.958, -29.622, 1.16, "Piscis Austrinus", "α Piscis Austrini"),
+    AlignmentStar("Deneb", 20.692, 45.280, 1.25, "Cygnus", "α Cygni"),
+    AlignmentStar("Regulus", 10.139, 11.967, 1.36, "Leo", "α Leonis"),
+    AlignmentStar("Castor", 7.592, 31.888, 1.58, "Gemini", "α Geminorum"),
+    AlignmentStar("Bellatrix", 5.417, 6.350, 1.64, "Orion", "γ Orionis"),
+    AlignmentStar("Elnath", 5.434, 28.610, 1.65, "Taurus", "β Tauri"),
+    AlignmentStar("Mirach", 1.155, 35.620, 2.07, "Andromeda", "β Andromedae"),
+    AlignmentStar("Hamal", 2.116, 23.462, 2.01, "Aries", "α Arietis"),
+    AlignmentStar("Mirfak", 3.361, 49.861, 1.79, "Perseus", "α Persei"),
+    AlignmentStar("Alkaid", 13.792, 49.300, 1.86, "Ursa Major", "η Ursae Majoris"),
+    AlignmentStar("Dubhe", 11.050, 61.750, 1.79, "Ursa Major", "α Ursae Majoris"),
 ]
 
 
